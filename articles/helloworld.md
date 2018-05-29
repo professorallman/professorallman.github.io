@@ -8,5 +8,5 @@ Until then you can find me other places on the internet.
 ](http://stackoverflow.com/users/2033671/professor-allman)
 
 [Linkedin](https://www.linkedin.com/in/professorallman/)  
-[Twitter](https://twitter.com/professorallman)
+[Twitter](https://twitter.com/professorallman)  
 [Github](https://github.com/professorallman)
