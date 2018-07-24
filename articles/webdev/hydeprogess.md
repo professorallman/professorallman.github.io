@@ -3,7 +3,7 @@
 
 I setout to create a blogging platform for myself for some ungodly reason. It all started when I went to create a github pages page. The suggestion was to use the Jekyll platform. It required installing ruby to run it, so instead of doing that I wrote my own in typescript.
 
-My goal was simple enough, have one JSON file for wirering up a bunch of mardown files. I used angular and made a simple application I call Hyde [https://github.com/professorallman/hyde]
+My goal was simple enough, have one JSON file for wirering up a bunch of mardown files. I used angular and made a simple application I call Hyde https://github.com/professorallman/hyde
 
 It's pretty straight forward and it works. Now that it's done all you have to do to use it update sitemap.json and tell it where your markdown file is
 
