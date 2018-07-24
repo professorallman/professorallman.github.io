@@ -1,4 +1,14 @@
 {
     "featured":"/articles/helloworld.md",
-    "articles":[]
+    "categories":{
+        "example category":[
+            {
+                "title":"Lorem Ipsum",
+                "category":"example category",
+                "summary":"An example article",
+                "posted":"9/9/1999",
+                "markdownLink":"/assets/example-article.md"
+            }
+        ]
+    }
 }
