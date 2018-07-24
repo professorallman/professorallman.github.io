@@ -1,13 +1,13 @@
 {
-    "featured":"/assets/welcome.md",
+    "featured":"/articles/helloworld.md",
     "categories":{
-        "example category":[
+        "Web Development":[
             {
-                "title":"Lorem Ipsum",
-                "category":"example category",
-                "summary":"An example article",
-                "posted":"9/9/1999",
-                "markdownLink":"/assets/example-article.md"
+                "title":"Hyde, a work in progress",
+                "category":"Web Development",
+                "summary":"Woes in developing my own \"cms\"",
+                "posted":"2018/07/24",
+                "markdownLink":"/articles/webdev/hydeprogess.md"
             }
         ]
     }
