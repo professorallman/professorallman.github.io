@@ -1,0 +1,18 @@
+---
+title: Sophia
+layout: post
+author: allman.austin
+permalink: /sophia/
+source-id: 1BKhlnXsNAIUsZAJ_9WFRdBpBplfsjgAgYQwAGoYMbck
+published: true
+---
+Austin Allman
+
+Writing short fiction
+
+1/27/13
+
+Sophia
+
+        	Why hello there! My name is Sophia, it is a pleasure to meet you. Sorry if I trail off you see I have been diagnosed with ADHD.* What is ADHD?* What is ADHD? Well you see it's quite simple it stands for Attention def… deficit this is my cat mittens.* That does not have an H nor a D in it.* What are you talking about? This is my cat mittens. Sometimes to freak people out I put my cat mittens in my mouth and stare at them blankly, want to see? *no*. As mu man mee, mits in micely PUH. This is my room. Here is a window, look how geometric it is? *Oh how-* over in this corner is mittens litter box. *Whats that smell?* I just showed you the litter box didn’t I? Geez I thought I had problems.  I haven’t changed it a while though it kind of suits the room doesn’t it?* What do you mean?* Well this yellow wallpaper was here when I moved in. Pee smells like yellow, yellow smells like pee, therefore this wall paper is pee! *That doesn’t make sense. *It doesn’t really matter though since mittens and I will change the wallpaper someday. But that day is not today. *Where’s the restroom?* In the corner remember?* That’s a litter box I can’t go in there.* Then don’t go, stay here!* I meant 'go’ as in use the bathroom.* But in a single room house there is not much room for a bathroom now is there silly. *I suppose this little tour is over then?* Not yet! You see here is my dresser, and in my dresser are my clothes. I have an everyday shirt, an every other day shirt, a Sunday shirt, a school shirt, and shirt to be worn only on the days that do not end in day.  Mittens has a similar collection of such shirts.* You dress your cat?* Of course! we cannot have a bunch of naked cats running the streets! Besides Mittens wuves his little outfits. The sailor one is my personal favorite, sailor Mittens! *Sailors don’t wear mittens. *What? *Nothing..* Anyways, the coat rack you passed on your way in was hand carved by General Custer in 1856. *Why would General Custer carve a coat rack?* R&R silly, war takes allot out of people ya’know.* Can I just have my Frisbee back so I can leave?* But I thought you came to tour the house? *It’s a single room…* Well I don’t have your Frisbee but you’re free to stay for coffee and porridge! *Wait, why did you say you found it?* I assumed we could go looking together! Wait where are you going? Oh no Mittens, were alone again! good thing I didn’t use the classified section for kitty litter yet. I’ll check the lost and founds while you put on the coffee Mitty.
+
