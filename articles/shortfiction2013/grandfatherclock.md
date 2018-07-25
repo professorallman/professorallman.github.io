@@ -1,0 +1,5 @@
+Grandfather clock
+
+Silver ,sterling or plated? No… perhaps it was white gold, then again maybe tin. Mechanics could explode from it like branches from a tree, though each piece remained rooted neatly in place. Down one branch were the weights, a yellow gold that shimmered. They swayed up and down to the rhythm of the universe. The weights were kept hidden behind a solid oak door chisled with intricacies, unlike most, which were mad of glass. Rarely did one get to see the inner workins of such a grand masterwork. Ah, I remember now, it was a handsome bronze face, just faded grey last time I saw him. Its movement flowed like that of a composition of Ludwig. It was the fragrance of lemon pledge, the tic’s and tock’s of gears moving about, it was when I could remember when we first met, though you had known me for some time before. In this moment is the realization that mechanical things do not perpetuate forever. Slowly it’s arms move toward their final resting spot.
+Farewell grandfather
+
