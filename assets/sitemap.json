@@ -9,6 +9,15 @@
                 "posted":"2018/07/24",
                 "markdownLink":"/articles/webdev/hydeprogess.md"
             }
+        ],
+        "Ideas Scractchpad":[
+            {
+                "title":"Twitter comments for Hyde",
+                "category":"Ideas Scratchpad",
+                "summary":"place to jot down ideas for comment system",
+                "posted":"2018/07/25",
+                "markdownLink":"/articles/ideas/twittergraphcomments.md"
+            }
         ]
     }
 }
