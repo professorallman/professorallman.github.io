@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "eslint": "8.25.0",
-    "eslint-config-next": "12.3.1"
+    "eslint-config-next": "12.3.1",
+    "jsdom": "^20.0.1",
+    "node-fetch": "^3.2.10"
   }
 }
