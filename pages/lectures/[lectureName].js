@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import PlaylistPlayer from '../../components/PlaylistPlayer.js';
 import VideoCard from '../../components/VideoCard.js';
 
 export async function getStaticPaths(){
@@ -32,9 +34,13 @@ export async function getStaticProps({params:{lectureName}}){
     }
 }
 
-export default function Lectures({videos}){
+export default function Lectures({videos,videoName}){
     return <>
-    <h1>Works!</h1>
+    <PlaylistPlayer videos={videos} ></PlaylistPlayer>
+    </>
+}
+
+/*
     {videos.map(video=>
         <VideoCard 
                 key={video.stream_url}
@@ -43,5 +49,4 @@ export default function Lectures({videos}){
                 thumbnail={video.thumbnail}
                 />
     )}
-    </>
-}
+*/
