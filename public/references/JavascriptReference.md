@@ -31,7 +31,7 @@
       - [Object.entries](#objectentries)
   - [Classes](#classes)
 - [Functions](#functions)
-  - [Named function decleration](#named-function-decleration)
+  - [Named function deceleration](#named-function-deceleration)
 - [DOM API](#dom-api)
   - [Querying the DOM tree](#querying-the-dom-tree)
     - [Query for a single element](#query-for-a-single-element)
@@ -159,7 +159,7 @@ myConst = 'b';//This is an error
 
 ### if
 
-An `if `statement checks if a condition expression is `true` and executes a block of code or statement that immideatly follows the condition check. If the expressionn evaulates to false then the block of code or statement is skipped.
+An `if `statement checks if a condition expression is `true` and executes a block of code or statement that immediately follows the condition check. If the expression evaluates to false then the block of code or statement is skipped.
 
 ```javascript
 let myCondition = true;
@@ -167,7 +167,7 @@ if(myCondition){//start of code block
     /**
      * The code between the curly braces
      * here will run if the condition
-     * between the parenthesis evaulatues 
+     * between the parenthesis evaluates 
      * to true
      */
 }//end of code block
@@ -180,7 +180,7 @@ if(myCondition)
  * /
 ```
 
-If you are just getting started I recommend avoiding ommiting the curly braces. It is esier to make a logic mistake down the road if you need to have a second statement bound to the if condition. The three examples bellow are equivalent:
+If you are just getting started I recommend avoiding omitting the curly braces. It is easier to make a logic mistake down the road if you need to have a second statement bound to the if condition. The three examples bellow are equivalent:
 
 ```javascript
 let myCondition = false;
@@ -222,7 +222,7 @@ if(conditionB){
 
 ### if/else if/else
 
-If you need only one code block to run can join multi conditions together with `if(){} else if{}`. By adding the else we join to conditions together causing them to be mutually exclusive, meaning only one code block will ever run. Only the first condition to evaluate to `true` will have it's respective code block run, additionally subsequent conditions will not even be checked! You can leverage this characteristic to wisely order your conditions so that computationally intensive operations don't run needlesly.
+If you need only one code block to run can join multi conditions together with `if(){} else if{}`. By adding the else we join to conditions together causing them to be mutually exclusive, meaning only one code block will ever run. Only the first condition to evaluate to `true` will have it's respective code block run, additionally subsequent conditions will not even be checked! You can leverage this characteristic to wisely order your conditions so that computationally intensive operations don't run needlessly.
 
 ```javascript
 let conditionA = true;
@@ -285,9 +285,14 @@ Loops allow you to repeat a block of code. A for loop follows the following synt
 
 `for(initializer, condition, post loop action)`
 
-| Syntax | Description | | ---------------- | ----------------------------------------------------------------------------- | | initializer | Sets up the `loop variable` to be used to check if the loop should exit | | condition | The condition that needs to be met. It should be checking if the `loop variable` is some value. | | post loop action | The statement gets executed after the block of code tied to the loop runs. The expression should be changing the value of `loop variable` to approach the condition needed to exit the loop. |
 
-```
+| Syntax | Description | 
+| ---------------- | ----------------------------------------------------------------------------- | 
+| initializer | Sets up the `loop variable` to be used to check if the loop should exit | 
+| condition | The condition that needs to be met. It should be checking if the `loop variable` is some value. | 
+| post loop action | The statement gets executed after the block of code tied to the loop runs. The expression should be changing the value of `loop variable` to approach the condition needed to exit the loop. |
+
+```javascript
 for(let i = 0; i < 10; i++){
     //This code block will run 10 times
 }
@@ -308,7 +313,7 @@ To access elements in the array we use the bracket `myArray[theIndex]` syntax, w
 ```javascript
 let fruits = ['Apple', 'Orange', 'Peach'];
 fruits[0]//Apple
-frtuis[1]//Orange
+fruits[1]//Orange
 fruits[2]//Peach
 ```
 
@@ -316,7 +321,7 @@ fruits[2]//Peach
 
 There are a handful of ways to iterate (access each value) over an array. In the following examples `myArray` is an array variable and `myValue` is a value in the array. Here is an example of accesing each value manually:
 
-```
+```javascript
 let myArray = ['value1', 'value2'];
 let myValue = myArray[0];
 myValue = myArray[1];
@@ -324,7 +329,7 @@ myValue = myArray[1];
 
 #### for with index
 
-```
+```javascript
 for(let i = 0; i < myArray.length; i++){
     let myValue = myArray[i];
 }
@@ -332,7 +337,7 @@ for(let i = 0; i < myArray.length; i++){
 
 #### for-of
 
-```
+```javascript
 for(let myValue of myArray){
 
 }
@@ -340,7 +345,7 @@ for(let myValue of myArray){
 
 #### Array.prototype.forEach
 
-```
+```javascript
 myArray.forEach((myValue)=>{
 
 });
@@ -348,9 +353,9 @@ myArray.forEach((myValue)=>{
 
 ## Object Literals
 
-Object literals are where we are creating a little object on the fly, as apposed to using a class and the `new` keyword. The can be used like traditional objects but are morefrequently used as simple ways to store data. We can use dot `.` and bracket `[]` notation to access the values stored in the object literal.
+Object literals are where we are creating a little object on the fly, as apposed to using a class and the `new` keyword. The can be used like traditional objects but are more frequently used as simple ways to store data. We can use dot `.` and bracket `[]` notation to access the values stored in the object literal.
 
-```
+```javascript
 let myObjectLiteral = {
     myKey: 'myValue',
     firstName: 'Austin'
@@ -363,11 +368,11 @@ myObjectLiteral['firstName']//Austin
 
 ### Iterating over an object
 
-Objects are not sequenced, meaning there is no gurantee the order you will iterate over the data. It's not even gurantee calling the same code twice will run in the same order! That being said it usually does.
+Objects are not sequenced, meaning there is no guarantee the order you will iterate over the data. It's not even guarantee calling the same code twice will run in the same order! That being said it usually does.
 
-In the following examples `myObj` is an object literal variable. `myKey` is a key in the object, and `myValue` is the value associated with `myKey` Here is an example of accesing each key/value manually:
+In the following examples `myObj` is an object literal variable. `myKey` is a key in the object, and `myValue` is the value associated with `myKey` Here is an example of accessing each key/value manually:
 
-```
+```javascript
 let myObj = { key1: 'value1', key2: 'value2'};
 let myKey = 'key1';
 let myValue = myObj[myKey];
@@ -377,7 +382,7 @@ myValue = myObj[myKey];
 
 #### for-in
 
-```
+```javascript
 for(let myKey in myObj){
     let myValue = myObj[myKey];
 }
@@ -385,7 +390,7 @@ for(let myKey in myObj){
 
 #### Object.keys
 
-```
+```javascript
 Object.keys(myObj).forEach((myKey)=>{
     let myValue = myObj[myKey];
 });
@@ -393,7 +398,7 @@ Object.keys(myObj).forEach((myKey)=>{
 
 #### Object.values
 
-```
+```javascript
 Object.values(myObj).forEach((myValue)=>{
 
 });
@@ -414,10 +419,10 @@ Object.entries(myObj).forEach((entry)=>{
 
 Just like object literals but have a formal structure that i shared across all instances of the class. You can use the same iteration strategies above with instances of classes. Not that methods in javascript are like any other piece of data and will show up in the iteration.
 
-```
+```javascript
 class Geometry{
     constructor(length, width){
-        this.length = lengthl;
+        this.length = length;
         this.width = width;
     }
 
@@ -431,7 +436,7 @@ class Square extends Geometry{
     }
 }
 let geom = new Geom(2,2);
-geom.calclulateArea();//4
+geom.calculateArea();//4
 let square = new Square(5);
 square.calculateArea();//25
 ```
@@ -440,24 +445,24 @@ square.calculateArea();//25
 
 Functions allow us to create reusable pieces of code. Functions are special in Javascript as they are treated like any other piece of data!
 
-## Named function decleration
+## Named function deceleration
 
-```
+```javascript
 function myFunctionName(myFunctionVariableOne){
-    let myFunctionScoepdVariable;
+    let myFunctionScopedVariable;
     return 'My Return Value';
 }
 ```
 
 # DOM API
 
-The DOM API is all about grabing elements off the DOM tree and modifying their properties or listening for events.
+The DOM API is all about grabbing elements off the DOM tree and modifying their properties or listening for events.
 
 ## Querying the DOM tree
 
-The esiest way to make sure the DOM tree is completely loaded is to use the `defer` attribute on your script tag.
+The easiest way to make sure the DOM tree is completely loaded is to use the `defer` attribute on your script tag.
 
-```
+```html
 <script src="myscript.js" defer></script>
 ```
 
@@ -465,14 +470,14 @@ The esiest way to make sure the DOM tree is completely loaded is to use the `def
 
 ### Query for a single element
 
-```
+```javascript
 let myElement = document.querySelector('p');
 ```
 
 ### Query the children of an element
 
-```
-let myParentElement = document.querySelecto('#parent');
+```javascript
+let myParentElement = document.querySelector('#parent');
 
 let childElements = myParentElement.querySelector('p');
 ```
@@ -481,7 +486,7 @@ let childElements = myParentElement.querySelector('p');
 
 ### Query for multiple elements
 
-```
+```javascript
 let myElements = document.querySelectorAll('p');
 ```
 
@@ -489,9 +494,9 @@ You can use all the strategies from [Iterating over an array](#iterating-over-an
 
 ## Changing style and content of an element
 
-I recommend to do the bulk of your stylework in CSS, afterall it's what CSS is best for! Then in javascript all we have to is add/remove/toggle CSS classes to our element.
+I recommend to do the bulk of your style work in CSS, after all it's what CSS is best for! Then in javascript all we have to is add/remove/toggle CSS classes to our element.
 
-```
+```html
 <style>
 .my-awesome-css-class{
    color: yellow;
@@ -505,16 +510,16 @@ el.classList.toggle('my-awesome-css-class');
 </script>
 ```
 
-For conttent 99% of the time you can use textContent. This will escape html and render the markup instad of running it.
+For content 99% of the time you can use textContent. This will escape html and render the markup instead of running it.
 
-```
+```javascript
 let el = document.querySelector('p');
 el.textContent = 'Hello World!';
 ```
 
-If you are in control of where the data is coming from and need to add HTML content you can use `innerHTML`. Note that this is dangerous if you use it with arbitrary user input as you are essentially giving them complete control of the clientside of the website.
+If you are in control of where the data is coming from and need to add HTML content you can use `innerHTML`. Note that this is dangerous if you use it with arbitrary user input as you are essentially giving them complete control of the client side of the website.
 
-```
+```javascript
 let el = document.querySelector('section');
 el.innerHTML= '<header><h1>Hello World!</h1></header>';
 ```
@@ -523,7 +528,7 @@ el.innerHTML= '<header><h1>Hello World!</h1></header>';
 
 You can use `innerHTML` from above or `createElement`
 
-```
+```javascript
 let myNewElement = document.createElement('p');
 myNewElement.textContent = 'Hello createElement!';
 document.body.appendChild(myNewElement);
@@ -531,21 +536,21 @@ document.body.appendChild(myNewElement);
 
 ## Listening for events
 
-You cvan listen for events on any HTML element that you grabbed off of the page with `querySelector`. You *could* use `querySelectorAll` and attach an event listener on each element but that is not avised since it attaches a ton of listeners. Events 'bubble' up the DOM tree till it is caught. This means that you can listen for an event on a parent element and catch it when an event fires from one of it's child elements. This has the added benifit that dynamically added elements events will also be captured by the parent element instead of having to attach a new event handler on each element.
+You can listen for events on any HTML element that you grabbed off of the page with `querySelector`. You *could* use `querySelectorAll` and attach an event listener on each element but that is not advised since it attaches a ton of listeners. Events 'bubble' up the DOM tree till it is caught. This means that you can listen for an event on a parent element and catch it when an event fires from one of it's child elements. This has the added benefit that dynamically added elements events will also be captured by the parent element instead of having to attach a new event handler on each element.
 
 ### Page Loaded
 
 You can wrap all your code in the `DOMContentLoaded` event to wait for the DOM Tree fully loaded. This means you can be sure that when you run a `querySelector` that the elements will all be there. You can also use the `defer` attribute so that you do not need to have everything in a function scope.
 
-```
+```javascript
 document.addEventListener('DOMContentLoaded',()=>{
-   //This code will run once the DOM tree is completly built
+   //This code will run once the DOM tree is completely built
 });
 ```
 
 ### Click
 
-```
+```javascript
 document.addEventListener('click',(event)=>{
     let target = event.target //the thing that was clicked
     //Example event delegation, filter out things we are
@@ -556,13 +561,13 @@ document.addEventListener('click',(event)=>{
 
 ### Forms
 
-```
+```javascript
 const form = document.querySelector('form');
 form.addEventListener('submit',(event)=>{
     /**
-    Stops the default behaviour of forms from happening
+    Stops the default behavior of forms from happening
     This lets us handle the form in javascript
-    insted of issuing a request to the server
+    instead of issuing a request to the server
     */
     event.preventDefault();
 });
@@ -574,11 +579,11 @@ Fetch is an awesome API for allowing us to issue HTTP Requests from javascript. 
 
 Not all webpages can be accessed directly form javascript using fetch. You will have to give it a try and if you see an error in the console about `CORS` then you know it won't work.
 
-We'll be using `async` functions to issue the requests. This allows us to `await` results from our HTTP requests. `async/await` can be a bit difficult to learn, for now just know that it means the code is nnot running right away and the code 'pauses' when you see the `await` keyword.
+We'll be using `async` functions to issue the requests. This allows us to `await` results from our HTTP requests. `async/await` can be a bit difficult to learn, for now just know that it means the code is not running right away and the code 'pauses' when you see the `await` keyword.
 
 ## HTTP GET
 
-```
+```javascript
 async function MyApp(){
     const response = await fetch('https://httpbin.org/get');
     const data = await response.json(); //or response.text()
@@ -592,7 +597,7 @@ MyApp();
 
 ## HTTP POST
 
-```
+```javascript
 async function MyApp(){
    const form = document.querySelector('form');
    const formData = new FormData(form);
