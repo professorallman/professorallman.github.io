@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 import Image from 'next/future/image';
 // coverImageLandscape={meLandscape} coverImagePortrait={mePortrait} 
-function ScreenComponent({className, children, coverImageLandscape,  coverImagePortrait, coverImageAlt}){
+function ScreenComponent({className, children}){
     return <section className={className}>
-        <Image src={coverImageLandscape} alt={coverImageAlt} className="landscape"/>
-        <Image src={coverImagePortrait} alt={coverImageAlt} className="portrait"/>
         <div>
          {children}
         </div>
@@ -14,16 +12,10 @@ const Screen  = styled(ScreenComponent)`
 &{
     position:relative;
     overflow:hidden;
-
-    .landscape,.portrait{
-        display:none;
-        width:initial;
-        height:initial;
-        position:absolute;
-        top:0;
-        left:0;
-        z-index:-100;
-    }
+    background-size: cover;
+    background-position:center;
+    background-repeat: no-repeat;
+   
     >div{
         color:white;
         width:100vw;
@@ -39,15 +31,13 @@ const Screen  = styled(ScreenComponent)`
     }
 
     @media screen and (orientation: landscape){
-        .landscape{
-            display:block;
-            width:100%;
+        &{
+            background-image:${(props)=>`url(${props.coverImageLandscape.src})`}
         }
     }
     @media screen and (orientation: portrait){
-        .portrait{
-            display:block;
-            height:100%;
+        &{
+            background-image:${(props)=>`url(${props.coverImagePortrait.src})`}
         }
     }
 
