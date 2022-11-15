@@ -8,6 +8,15 @@ const ProjectList = styled(({className,children})=>{
         )}
     </ul>
 })`
+&{
+    list-style:none;
+    padding:0;
+    margin: 50px 0px;
+    display:flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content:space-evenly;
+}
 `;
 
 export default ProjectList;

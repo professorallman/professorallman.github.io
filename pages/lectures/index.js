@@ -23,7 +23,7 @@ function IndexComponent({className}){
                 <li><Link href="/lectures/2021-Spring-Web-III">Web III</Link></li>
                 <li><Link href="/lectures/2021-Spring-Data-Structures">Data Structures</Link></li>
             </ul>
-            <h2>Fall 20202</h2>
+            <h2>Fall 2020</h2>
             <ul>
                 <li><Link href="/lectures/2020-Fall-Web-I">Web I</Link></li>
                 <li><Link href="/lectures/2020-Fall-Java-II">Java II</Link></li>

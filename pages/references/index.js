@@ -14,7 +14,7 @@ const Index = styled(({className})=>
         </>}></Header>
         <ul>
             <li>
-                <Link href="/references/JavascriptReference.html">Javescript</Link>
+                <Link href="/references/JavascriptReference.html">Javascript</Link>
             </li>
         </ul>
 </section>
