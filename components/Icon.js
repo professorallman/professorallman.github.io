@@ -1,6 +1,6 @@
 import styled from "styled-components";
-
-const Icon = styled(({className, name, href})=><img className={className} src={"/icons/" + name + ".svg"} title={name} />)`
+import Image from 'next/future/image'
+const Icon = styled(({className, name, href})=><Image className={className} src={"/icons/" + name + ".svg"} title={name} alt=""/>)`
 &{
     width:100%;
 }

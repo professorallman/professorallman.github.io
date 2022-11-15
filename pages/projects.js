@@ -16,7 +16,7 @@ export default function Projects(){
                 <Icon name="react"/>   
                 <Icon name="javascript"/>    
             </>}
-                sourceLink={<a href="https://github.com/professorallman/professorallman.github.io" target="_blank"><Icon name="github"/></a>}
+                sourceLink={<a href="https://github.com/professorallman/professorallman.github.io" target="_blank" rel="noreferrer" ><Icon name="github"/></a>}
                 
                 />
 
@@ -31,8 +31,8 @@ export default function Projects(){
                             <Icon name="svelte"/>    
                             <Icon name="javascript"/>    
                         </>}
-                sourceLink={<a href="https://github.com/professorallman/Bible" target="_blank"><Icon name="github"/></a>}
-                liveLink={<a href='https://professorallman.github.io/Bible/CPDV/Genesis/1' target="_blank">
+                sourceLink={<a href="https://github.com/professorallman/Bible" target="_blank" rel="noreferrer" ><Icon name="github"/></a>}
+                liveLink={<a href='https://professorallman.github.io/Bible/CPDV/Genesis/1' target="_blank" rel="noreferrer" >
                     <Icon name="external"/>
                 </a>}
                 />
@@ -42,7 +42,7 @@ export default function Projects(){
 
         <h1>Micro Projects</h1>
         <p>These are tiny applications I used to delete but decided to make a single repo to store all the little things I make</p>
-        <a href="https://github.com/professorallman/Microprojects" target="_blank">Link to the repository with all the project source code</a>
+        <a href="https://github.com/professorallman/Microprojects" target="_blank" rel="noreferrer" >Link to the repository with all the project source code</a>
         <ul></ul>
     </Layout>
 }

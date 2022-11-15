@@ -9,7 +9,7 @@ function PlaylistPlayerComponent({className, videos}){
     useEffect(()=>{
         const video = videos.filter(v=>v.title==router.query.videoName).pop();
         if(video) setSelectedVideo(video);
-    },[router.query])
+    },[router.query, videos]);
     
     return <div className={className}>
         <video src={stream_url} poster={thumbnail} controls controlsList="nodownload" />
