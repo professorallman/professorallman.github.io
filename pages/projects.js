@@ -1,3 +1,4 @@
+import Header from "../components/Header";
 import Icon from "../components/Icon";
 import Layout from "../components/layout";
 import ProjectCard from "../components/ProjectCard";
@@ -5,8 +6,7 @@ import ProjectList from "../components/ProjectList";
 
 export default function Projects(){
     return <Layout title="My Projects | Austin Allman" meta="Different programming projects to demonstrate my skills as a software developer">
-        <h1>Projects</h1>
-        <p>Here is a list of larger projects that I have made</p>
+        <Header title="Projects" description="Here is a list of larger projects that I have made" />
         <ProjectList>
             <ProjectCard key="HelloWorld" 
                 name="This website!"

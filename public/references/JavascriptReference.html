@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Comments &amp; Debugging</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension vscode.markdown-math */
+@font-face{font-family:KaTeX_AMS;font-style:normal;font-weight:400;src:url(fonts/KaTeX_AMS-Regular.woff2) format("woff2"),url(fonts/KaTeX_AMS-Regular.woff) format("woff"),url(fonts/KaTeX_AMS-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Caligraphic;font-style:normal;font-weight:700;src:url(fonts/KaTeX_Caligraphic-Bold.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Bold.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Bold.ttf) format("truetype")}@font-face{font-family:KaTeX_Caligraphic;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Caligraphic-Regular.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Regular.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Fraktur;font-style:normal;font-weight:700;src:url(fonts/KaTeX_Fraktur-Bold.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Bold.woff) format("woff"),url(fonts/KaTeX_Fraktur-Bold.ttf) format("truetype")}@font-face{font-family:KaTeX_Fraktur;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Fraktur-Regular.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Regular.woff) format("woff"),url(fonts/KaTeX_Fraktur-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:normal;font-weight:700;src:url(fonts/KaTeX_Main-Bold.woff2) format("woff2"),url(fonts/KaTeX_Main-Bold.woff) format("woff"),url(fonts/KaTeX_Main-Bold.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:italic;font-weight:700;src:url(fonts/KaTeX_Main-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Main-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Main-BoldItalic.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:italic;font-weight:400;src:url(fonts/KaTeX_Main-Italic.woff2) format("woff2"),url(fonts/KaTeX_Main-Italic.woff) format("woff"),url(fonts/KaTeX_Main-Italic.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Main-Regular.woff2) format("woff2"),url(fonts/KaTeX_Main-Regular.woff) format("woff"),url(fonts/KaTeX_Main-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Math;font-style:italic;font-weight:700;src:url(fonts/KaTeX_Math-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Math-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Math-BoldItalic.ttf) format("truetype")}@font-face{font-family:KaTeX_Math;font-style:italic;font-weight:400;src:url(fonts/KaTeX_Math-Italic.woff2) format("woff2"),url(fonts/KaTeX_Math-Italic.woff) format("woff"),url(fonts/KaTeX_Math-Italic.ttf) format("truetype")}@font-face{font-family:"KaTeX_SansSerif";font-style:normal;font-weight:700;src:url(fonts/KaTeX_SansSerif-Bold.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Bold.woff) format("woff"),url(fonts/KaTeX_SansSerif-Bold.ttf) format("truetype")}@font-face{font-family:"KaTeX_SansSerif";font-style:italic;font-weight:400;src:url(fonts/KaTeX_SansSerif-Italic.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Italic.woff) format("woff"),url(fonts/KaTeX_SansSerif-Italic.ttf) format("truetype")}@font-face{font-family:"KaTeX_SansSerif";font-style:normal;font-weight:400;src:url(fonts/KaTeX_SansSerif-Regular.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Regular.woff) format("woff"),url(fonts/KaTeX_SansSerif-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Script;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Script-Regular.woff2) format("woff2"),url(fonts/KaTeX_Script-Regular.woff) format("woff"),url(fonts/KaTeX_Script-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size1;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size1-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size1-Regular.woff) format("woff"),url(fonts/KaTeX_Size1-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size2;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size2-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size2-Regular.woff) format("woff"),url(fonts/KaTeX_Size2-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size3;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size3-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size3-Regular.woff) format("woff"),url(fonts/KaTeX_Size3-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size4;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size4-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size4-Regular.woff) format("woff"),url(fonts/KaTeX_Size4-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Typewriter;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Typewriter-Regular.woff2) format("woff2"),url(fonts/KaTeX_Typewriter-Regular.woff) format("woff"),url(fonts/KaTeX_Typewriter-Regular.ttf) format("truetype")}.katex{text-rendering:auto;font:normal 1.21em KaTeX_Main,Times New Roman,serif;line-height:1.2;text-indent:0}.katex *{-ms-high-contrast-adjust:none!important;border-color:currentColor}.katex .katex-version:after{content:"0.16.2"}.katex .katex-mathml{clip:rect(1px,1px,1px,1px);border:0;height:1px;overflow:hidden;padding:0;position:absolute;width:1px}.katex .katex-html>.newline{display:block}.katex .base{position:relative;white-space:nowrap;width:-webkit-min-content;width:-moz-min-content;width:min-content}.katex .base,.katex .strut{display:inline-block}.katex .textbf{font-weight:700}.katex .textit{font-style:italic}.katex .textrm{font-family:KaTeX_Main}.katex .textsf{font-family:KaTeX_SansSerif}.katex .texttt{font-family:KaTeX_Typewriter}.katex .mathnormal{font-family:KaTeX_Math;font-style:italic}.katex .mathit{font-family:KaTeX_Main;font-style:italic}.katex .mathrm{font-style:normal}.katex .mathbf{font-family:KaTeX_Main;font-weight:700}.katex .boldsymbol{font-family:KaTeX_Math;font-style:italic;font-weight:700}.katex .amsrm,.katex .mathbb,.katex .textbb{font-family:KaTeX_AMS}.katex .mathcal{font-family:KaTeX_Caligraphic}.katex .mathfrak,.katex .textfrak{font-family:KaTeX_Fraktur}.katex .mathtt{font-family:KaTeX_Typewriter}.katex .mathscr,.katex .textscr{font-family:KaTeX_Script}.katex .mathsf,.katex .textsf{font-family:KaTeX_SansSerif}.katex .mathboldsf,.katex .textboldsf{font-family:KaTeX_SansSerif;font-weight:700}.katex .mathitsf,.katex .textitsf{font-family:KaTeX_SansSerif;font-style:italic}.katex .mainrm{font-family:KaTeX_Main;font-style:normal}.katex .vlist-t{border-collapse:collapse;display:inline-table;table-layout:fixed}.katex .vlist-r{display:table-row}.katex .vlist{display:table-cell;position:relative;vertical-align:bottom}.katex .vlist>span{display:block;height:0;position:relative}.katex .vlist>span>span{display:inline-block}.katex .vlist>span>.pstrut{overflow:hidden;width:0}.katex .vlist-t2{margin-right:-2px}.katex .vlist-s{display:table-cell;font-size:1px;min-width:2px;vertical-align:bottom;width:2px}.katex .vbox{align-items:baseline;display:inline-flex;flex-direction:column}.katex .hbox{width:100%}.katex .hbox,.katex .thinbox{display:inline-flex;flex-direction:row}.katex .thinbox{max-width:0;width:0}.katex .msupsub{text-align:left}.katex .mfrac>span>span{text-align:center}.katex .mfrac .frac-line{border-bottom-style:solid;display:inline-block;width:100%}.katex .hdashline,.katex .hline,.katex .mfrac .frac-line,.katex .overline .overline-line,.katex .rule,.katex .underline .underline-line{min-height:1px}.katex .mspace{display:inline-block}.katex .clap,.katex .llap,.katex .rlap{position:relative;width:0}.katex .clap>.inner,.katex .llap>.inner,.katex .rlap>.inner{position:absolute}.katex .clap>.fix,.katex .llap>.fix,.katex .rlap>.fix{display:inline-block}.katex .llap>.inner{right:0}.katex .clap>.inner,.katex .rlap>.inner{left:0}.katex .clap>.inner>span{margin-left:-50%;margin-right:50%}.katex .rule{border:0 solid;display:inline-block;position:relative}.katex .hline,.katex .overline .overline-line,.katex .underline .underline-line{border-bottom-style:solid;display:inline-block;width:100%}.katex .hdashline{border-bottom-style:dashed;display:inline-block;width:100%}.katex .sqrt>.root{margin-left:.27777778em;margin-right:-.55555556em}.katex .fontsize-ensurer.reset-size1.size1,.katex .sizing.reset-size1.size1{font-size:1em}.katex .fontsize-ensurer.reset-size1.size2,.katex .sizing.reset-size1.size2{font-size:1.2em}.katex .fontsize-ensurer.reset-size1.size3,.katex .sizing.reset-size1.size3{font-size:1.4em}.katex .fontsize-ensurer.reset-size1.size4,.katex .sizing.reset-size1.size4{font-size:1.6em}.katex .fontsize-ensurer.reset-size1.size5,.katex .sizing.reset-size1.size5{font-size:1.8em}.katex .fontsize-ensurer.reset-size1.size6,.katex .sizing.reset-size1.size6{font-size:2em}.katex .fontsize-ensurer.reset-size1.size7,.katex .sizing.reset-size1.size7{font-size:2.4em}.katex .fontsize-ensurer.reset-size1.size8,.katex .sizing.reset-size1.size8{font-size:2.88em}.katex .fontsize-ensurer.reset-size1.size9,.katex .sizing.reset-size1.size9{font-size:3.456em}.katex .fontsize-ensurer.reset-size1.size10,.katex .sizing.reset-size1.size10{font-size:4.148em}.katex .fontsize-ensurer.reset-size1.size11,.katex .sizing.reset-size1.size11{font-size:4.976em}.katex .fontsize-ensurer.reset-size2.size1,.katex .sizing.reset-size2.size1{font-size:.83333333em}.katex .fontsize-ensurer.reset-size2.size2,.katex .sizing.reset-size2.size2{font-size:1em}.katex .fontsize-ensurer.reset-size2.size3,.katex .sizing.reset-size2.size3{font-size:1.16666667em}.katex .fontsize-ensurer.reset-size2.size4,.katex .sizing.reset-size2.size4{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size2.size5,.katex .sizing.reset-size2.size5{font-size:1.5em}.katex .fontsize-ensurer.reset-size2.size6,.katex .sizing.reset-size2.size6{font-size:1.66666667em}.katex .fontsize-ensurer.reset-size2.size7,.katex .sizing.reset-size2.size7{font-size:2em}.katex .fontsize-ensurer.reset-size2.size8,.katex .sizing.reset-size2.size8{font-size:2.4em}.katex .fontsize-ensurer.reset-size2.size9,.katex .sizing.reset-size2.size9{font-size:2.88em}.katex .fontsize-ensurer.reset-size2.size10,.katex .sizing.reset-size2.size10{font-size:3.45666667em}.katex .fontsize-ensurer.reset-size2.size11,.katex .sizing.reset-size2.size11{font-size:4.14666667em}.katex .fontsize-ensurer.reset-size3.size1,.katex .sizing.reset-size3.size1{font-size:.71428571em}.katex .fontsize-ensurer.reset-size3.size2,.katex .sizing.reset-size3.size2{font-size:.85714286em}.katex .fontsize-ensurer.reset-size3.size3,.katex .sizing.reset-size3.size3{font-size:1em}.katex .fontsize-ensurer.reset-size3.size4,.katex .sizing.reset-size3.size4{font-size:1.14285714em}.katex .fontsize-ensurer.reset-size3.size5,.katex .sizing.reset-size3.size5{font-size:1.28571429em}.katex .fontsize-ensurer.reset-size3.size6,.katex .sizing.reset-size3.size6{font-size:1.42857143em}.katex .fontsize-ensurer.reset-size3.size7,.katex .sizing.reset-size3.size7{font-size:1.71428571em}.katex .fontsize-ensurer.reset-size3.size8,.katex .sizing.reset-size3.size8{font-size:2.05714286em}.katex .fontsize-ensurer.reset-size3.size9,.katex .sizing.reset-size3.size9{font-size:2.46857143em}.katex .fontsize-ensurer.reset-size3.size10,.katex .sizing.reset-size3.size10{font-size:2.96285714em}.katex .fontsize-ensurer.reset-size3.size11,.katex .sizing.reset-size3.size11{font-size:3.55428571em}.katex .fontsize-ensurer.reset-size4.size1,.katex .sizing.reset-size4.size1{font-size:.625em}.katex .fontsize-ensurer.reset-size4.size2,.katex .sizing.reset-size4.size2{font-size:.75em}.katex .fontsize-ensurer.reset-size4.size3,.katex .sizing.reset-size4.size3{font-size:.875em}.katex .fontsize-ensurer.reset-size4.size4,.katex .sizing.reset-size4.size4{font-size:1em}.katex .fontsize-ensurer.reset-size4.size5,.katex .sizing.reset-size4.size5{font-size:1.125em}.katex .fontsize-ensurer.reset-size4.size6,.katex .sizing.reset-size4.size6{font-size:1.25em}.katex .fontsize-ensurer.reset-size4.size7,.katex .sizing.reset-size4.size7{font-size:1.5em}.katex .fontsize-ensurer.reset-size4.size8,.katex .sizing.reset-size4.size8{font-size:1.8em}.katex .fontsize-ensurer.reset-size4.size9,.katex .sizing.reset-size4.size9{font-size:2.16em}.katex .fontsize-ensurer.reset-size4.size10,.katex .sizing.reset-size4.size10{font-size:2.5925em}.katex .fontsize-ensurer.reset-size4.size11,.katex .sizing.reset-size4.size11{font-size:3.11em}.katex .fontsize-ensurer.reset-size5.size1,.katex .sizing.reset-size5.size1{font-size:.55555556em}.katex .fontsize-ensurer.reset-size5.size2,.katex .sizing.reset-size5.size2{font-size:.66666667em}.katex .fontsize-ensurer.reset-size5.size3,.katex .sizing.reset-size5.size3{font-size:.77777778em}.katex .fontsize-ensurer.reset-size5.size4,.katex .sizing.reset-size5.size4{font-size:.88888889em}.katex .fontsize-ensurer.reset-size5.size5,.katex .sizing.reset-size5.size5{font-size:1em}.katex .fontsize-ensurer.reset-size5.size6,.katex .sizing.reset-size5.size6{font-size:1.11111111em}.katex .fontsize-ensurer.reset-size5.size7,.katex .sizing.reset-size5.size7{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size5.size8,.katex .sizing.reset-size5.size8{font-size:1.6em}.katex .fontsize-ensurer.reset-size5.size9,.katex .sizing.reset-size5.size9{font-size:1.92em}.katex .fontsize-ensurer.reset-size5.size10,.katex .sizing.reset-size5.size10{font-size:2.30444444em}.katex .fontsize-ensurer.reset-size5.size11,.katex .sizing.reset-size5.size11{font-size:2.76444444em}.katex .fontsize-ensurer.reset-size6.size1,.katex .sizing.reset-size6.size1{font-size:.5em}.katex .fontsize-ensurer.reset-size6.size2,.katex .sizing.reset-size6.size2{font-size:.6em}.katex .fontsize-ensurer.reset-size6.size3,.katex .sizing.reset-size6.size3{font-size:.7em}.katex .fontsize-ensurer.reset-size6.size4,.katex .sizing.reset-size6.size4{font-size:.8em}.katex .fontsize-ensurer.reset-size6.size5,.katex .sizing.reset-size6.size5{font-size:.9em}.katex .fontsize-ensurer.reset-size6.size6,.katex .sizing.reset-size6.size6{font-size:1em}.katex .fontsize-ensurer.reset-size6.size7,.katex .sizing.reset-size6.size7{font-size:1.2em}.katex .fontsize-ensurer.reset-size6.size8,.katex .sizing.reset-size6.size8{font-size:1.44em}.katex .fontsize-ensurer.reset-size6.size9,.katex .sizing.reset-size6.size9{font-size:1.728em}.katex .fontsize-ensurer.reset-size6.size10,.katex .sizing.reset-size6.size10{font-size:2.074em}.katex .fontsize-ensurer.reset-size6.size11,.katex .sizing.reset-size6.size11{font-size:2.488em}.katex .fontsize-ensurer.reset-size7.size1,.katex .sizing.reset-size7.size1{font-size:.41666667em}.katex .fontsize-ensurer.reset-size7.size2,.katex .sizing.reset-size7.size2{font-size:.5em}.katex .fontsize-ensurer.reset-size7.size3,.katex .sizing.reset-size7.size3{font-size:.58333333em}.katex .fontsize-ensurer.reset-size7.size4,.katex .sizing.reset-size7.size4{font-size:.66666667em}.katex .fontsize-ensurer.reset-size7.size5,.katex .sizing.reset-size7.size5{font-size:.75em}.katex .fontsize-ensurer.reset-size7.size6,.katex .sizing.reset-size7.size6{font-size:.83333333em}.katex .fontsize-ensurer.reset-size7.size7,.katex .sizing.reset-size7.size7{font-size:1em}.katex .fontsize-ensurer.reset-size7.size8,.katex .sizing.reset-size7.size8{font-size:1.2em}.katex .fontsize-ensurer.reset-size7.size9,.katex .sizing.reset-size7.size9{font-size:1.44em}.katex .fontsize-ensurer.reset-size7.size10,.katex .sizing.reset-size7.size10{font-size:1.72833333em}.katex .fontsize-ensurer.reset-size7.size11,.katex .sizing.reset-size7.size11{font-size:2.07333333em}.katex .fontsize-ensurer.reset-size8.size1,.katex .sizing.reset-size8.size1{font-size:.34722222em}.katex .fontsize-ensurer.reset-size8.size2,.katex .sizing.reset-size8.size2{font-size:.41666667em}.katex .fontsize-ensurer.reset-size8.size3,.katex .sizing.reset-size8.size3{font-size:.48611111em}.katex .fontsize-ensurer.reset-size8.size4,.katex .sizing.reset-size8.size4{font-size:.55555556em}.katex .fontsize-ensurer.reset-size8.size5,.katex .sizing.reset-size8.size5{font-size:.625em}.katex .fontsize-ensurer.reset-size8.size6,.katex .sizing.reset-size8.size6{font-size:.69444444em}.katex .fontsize-ensurer.reset-size8.size7,.katex .sizing.reset-size8.size7{font-size:.83333333em}.katex .fontsize-ensurer.reset-size8.size8,.katex .sizing.reset-size8.size8{font-size:1em}.katex .fontsize-ensurer.reset-size8.size9,.katex .sizing.reset-size8.size9{font-size:1.2em}.katex .fontsize-ensurer.reset-size8.size10,.katex .sizing.reset-size8.size10{font-size:1.44027778em}.katex .fontsize-ensurer.reset-size8.size11,.katex .sizing.reset-size8.size11{font-size:1.72777778em}.katex .fontsize-ensurer.reset-size9.size1,.katex .sizing.reset-size9.size1{font-size:.28935185em}.katex .fontsize-ensurer.reset-size9.size2,.katex .sizing.reset-size9.size2{font-size:.34722222em}.katex .fontsize-ensurer.reset-size9.size3,.katex .sizing.reset-size9.size3{font-size:.40509259em}.katex .fontsize-ensurer.reset-size9.size4,.katex .sizing.reset-size9.size4{font-size:.46296296em}.katex .fontsize-ensurer.reset-size9.size5,.katex .sizing.reset-size9.size5{font-size:.52083333em}.katex .fontsize-ensurer.reset-size9.size6,.katex .sizing.reset-size9.size6{font-size:.5787037em}.katex .fontsize-ensurer.reset-size9.size7,.katex .sizing.reset-size9.size7{font-size:.69444444em}.katex .fontsize-ensurer.reset-size9.size8,.katex .sizing.reset-size9.size8{font-size:.83333333em}.katex .fontsize-ensurer.reset-size9.size9,.katex .sizing.reset-size9.size9{font-size:1em}.katex .fontsize-ensurer.reset-size9.size10,.katex .sizing.reset-size9.size10{font-size:1.20023148em}.katex .fontsize-ensurer.reset-size9.size11,.katex .sizing.reset-size9.size11{font-size:1.43981481em}.katex .fontsize-ensurer.reset-size10.size1,.katex .sizing.reset-size10.size1{font-size:.24108004em}.katex .fontsize-ensurer.reset-size10.size2,.katex .sizing.reset-size10.size2{font-size:.28929605em}.katex .fontsize-ensurer.reset-size10.size3,.katex .sizing.reset-size10.size3{font-size:.33751205em}.katex .fontsize-ensurer.reset-size10.size4,.katex .sizing.reset-size10.size4{font-size:.38572806em}.katex .fontsize-ensurer.reset-size10.size5,.katex .sizing.reset-size10.size5{font-size:.43394407em}.katex .fontsize-ensurer.reset-size10.size6,.katex .sizing.reset-size10.size6{font-size:.48216008em}.katex .fontsize-ensurer.reset-size10.size7,.katex .sizing.reset-size10.size7{font-size:.57859209em}.katex .fontsize-ensurer.reset-size10.size8,.katex .sizing.reset-size10.size8{font-size:.69431051em}.katex .fontsize-ensurer.reset-size10.size9,.katex .sizing.reset-size10.size9{font-size:.83317261em}.katex .fontsize-ensurer.reset-size10.size10,.katex .sizing.reset-size10.size10{font-size:1em}.katex .fontsize-ensurer.reset-size10.size11,.katex .sizing.reset-size10.size11{font-size:1.19961427em}.katex .fontsize-ensurer.reset-size11.size1,.katex .sizing.reset-size11.size1{font-size:.20096463em}.katex .fontsize-ensurer.reset-size11.size2,.katex .sizing.reset-size11.size2{font-size:.24115756em}.katex .fontsize-ensurer.reset-size11.size3,.katex .sizing.reset-size11.size3{font-size:.28135048em}.katex .fontsize-ensurer.reset-size11.size4,.katex .sizing.reset-size11.size4{font-size:.32154341em}.katex .fontsize-ensurer.reset-size11.size5,.katex .sizing.reset-size11.size5{font-size:.36173633em}.katex .fontsize-ensurer.reset-size11.size6,.katex .sizing.reset-size11.size6{font-size:.40192926em}.katex .fontsize-ensurer.reset-size11.size7,.katex .sizing.reset-size11.size7{font-size:.48231511em}.katex .fontsize-ensurer.reset-size11.size8,.katex .sizing.reset-size11.size8{font-size:.57877814em}.katex .fontsize-ensurer.reset-size11.size9,.katex .sizing.reset-size11.size9{font-size:.69453376em}.katex .fontsize-ensurer.reset-size11.size10,.katex .sizing.reset-size11.size10{font-size:.83360129em}.katex .fontsize-ensurer.reset-size11.size11,.katex .sizing.reset-size11.size11{font-size:1em}.katex .delimsizing.size1{font-family:KaTeX_Size1}.katex .delimsizing.size2{font-family:KaTeX_Size2}.katex .delimsizing.size3{font-family:KaTeX_Size3}.katex .delimsizing.size4{font-family:KaTeX_Size4}.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}.katex .nulldelimiter{display:inline-block;width:.12em}.katex .delimcenter,.katex .op-symbol{position:relative}.katex .op-symbol.small-op{font-family:KaTeX_Size1}.katex .op-symbol.large-op{font-family:KaTeX_Size2}.katex .accent>.vlist-t,.katex .op-limits>.vlist-t{text-align:center}.katex .accent .accent-body{position:relative}.katex .accent .accent-body:not(.accent-full){width:0}.katex .overlay{display:block}.katex .mtable .vertical-separator{display:inline-block;min-width:1px}.katex .mtable .arraycolsep{display:inline-block}.katex .mtable .col-align-c>.vlist-t{text-align:center}.katex .mtable .col-align-l>.vlist-t{text-align:left}.katex .mtable .col-align-r>.vlist-t{text-align:right}.katex .svg-align{text-align:left}.katex svg{fill:currentColor;stroke:currentColor;fill-rule:nonzero;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:block;height:inherit;position:absolute;width:100%}.katex svg path{stroke:none}.katex img{border-style:none;max-height:none;max-width:none;min-height:0;min-width:0}.katex .stretchy{display:block;overflow:hidden;position:relative;width:100%}.katex .stretchy:after,.katex .stretchy:before{content:""}.katex .hide-tail{overflow:hidden;position:relative;width:100%}.katex .halfarrow-left{left:0;overflow:hidden;position:absolute;width:50.2%}.katex .halfarrow-right{overflow:hidden;position:absolute;right:0;width:50.2%}.katex .brace-left{left:0;overflow:hidden;position:absolute;width:25.1%}.katex .brace-center{left:25%;overflow:hidden;position:absolute;width:50%}.katex .brace-right{overflow:hidden;position:absolute;right:0;width:25.1%}.katex .x-arrow-pad{padding:0 .5em}.katex .cd-arrow-pad{padding:0 .55556em 0 .27778em}.katex .mover,.katex .munder,.katex .x-arrow{text-align:center}.katex .boxpad{padding:0 .3em}.katex .fbox,.katex .fcolorbox{border:.04em solid;box-sizing:border-box}.katex .cancel-pad{padding:0 .2em}.katex .cancel-lap{margin-left:-.2em;margin-right:-.2em}.katex .sout{border-bottom-style:solid;border-bottom-width:.08em}.katex .angl{border-right:.049em solid;border-top:.049em solid;box-sizing:border-box;margin-right:.03889em}.katex .anglpad{padding:0 .03889em}.katex .eqn-num:before{content:"(" counter(katexEqnNo) ")";counter-increment:katexEqnNo}.katex .mml-eqn-num:before{content:"(" counter(mmlEqnNo) ")";counter-increment:mmlEqnNo}.katex .mtr-glue{width:50%}.katex .cd-vert-arrow{display:inline-block;position:relative}.katex .cd-label-left{display:inline-block;position:absolute;right:calc(50% + .3em);text-align:left}.katex .cd-label-right{display:inline-block;left:calc(50% + .3em);position:absolute;text-align:right}.katex-display{display:block;margin:1em 0;text-align:center}.katex-display>.katex{display:block;text-align:center;white-space:nowrap}.katex-display>.katex>.katex-html{display:block;position:relative}.katex-display>.katex>.katex-html>.tag{position:absolute;right:0}.katex-display.leqno>.katex>.katex-html>.tag{left:0;right:auto}.katex-display.fleqn>.katex{padding-left:2em;text-align:left}body{counter-reset:katexEqnNo mmlEqnNo}
+
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.katex-error {
+	color: var(--vscode-editorError-foreground);
+}
+
+/* From extension ms-toolsai.jupyter */
+/* These classnames are inherited from bootstrap, but are present in most notebook renderers */
+
+.alert {
+    width: auto;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+}
+#preview > .alert:last-child {
+    /* Prevent this being set to zero by the default notebook stylesheet */
+    padding-bottom: 1em;
+}
+
+.alert-success {
+    /* Note there is no suitable color available, so we just copy "info" */
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-info {
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-warning {
+    background-color: var(--theme-warning-background);
+    color: var(--theme-warning-foreground);
+}
+.alert-danger {
+    background-color: var(--theme-error-background);
+    color: var(--theme-error-foreground);
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1>The Javascript Reference</h1>
+<a href="/references">Back to references</a>
+<p><strong>Table of Contents</strong></p>
+<ul>
+<li><a href="#comments--debugging">Comments &amp; Debugging</a>
+<ul>
+<li><a href="#comments">Comments</a></li>
+<li><a href="#debugging">Debugging</a>
+<ul>
+<li><a href="#developer-tools-built-into-the-web-browsers">Developer tools built into the web browsers</a></li>
+</ul>
+</li>
+<li><a href="#troubleshooting-errors">Troubleshooting errors</a>
+<ul>
+<li><a href="#checking-the-console">Checking the console</a></li>
+<li><a href="#logging-to-the-console-from-your-scripts">Logging to the console from your scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#variables--control-flow">Variables &amp; Control Flow</a>
+<ul>
+<li><a href="#declaring-variables">Declaring Variables</a></li>
+<li><a href="#decision-structures">Decision Structures</a>
+<ul>
+<li><a href="#if">if</a></li>
+<li><a href="#disjointed-if">Disjointed if</a></li>
+<li><a href="#ifelse-ifelse">if/else if/else</a></li>
+<li><a href="#switch">Switch</a></li>
+<li><a href="#for-loop">For Loop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#representing-data">Representing Data</a>
+<ul>
+<li><a href="#arrays">Arrays</a>
+<ul>
+<li><a href="#iterating-over-an-array">Iterating over an array</a>
+<ul>
+<li><a href="#for-with-index">for with index</a></li>
+<li><a href="#for-of">for-of</a></li>
+<li><a href="#arrayprototypeforeach">Array.prototype.forEach</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#object-literals">Object Literals</a>
+<ul>
+<li><a href="#iterating-over-an-object">Iterating over an object</a>
+<ul>
+<li><a href="#for-in">for-in</a></li>
+<li><a href="#objectkeys">Object.keys</a></li>
+<li><a href="#objectvalues">Object.values</a></li>
+<li><a href="#objectentries">Object.entries</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#classes">Classes</a></li>
+</ul>
+</li>
+<li><a href="#functions">Functions</a>
+<ul>
+<li><a href="#named-function-decleration">Named function decleration</a></li>
+</ul>
+</li>
+<li><a href="#dom-api">DOM API</a>
+<ul>
+<li><a href="#querying-the-dom-tree">Querying the DOM tree</a>
+<ul>
+<li><a href="#query-for-a-single-element">Query for a single element</a></li>
+<li><a href="#query-the-children-of-an-element">Query the children of an element</a></li>
+<li><a href="#query-for-multiple-elements">Query for multiple elements</a></li>
+</ul>
+</li>
+<li><a href="#changing-style-and-content-of-an-element">Changing style and content of an element</a></li>
+<li><a href="#creating-elements">Creating elements</a></li>
+<li><a href="#listening-for-events">Listening for events</a>
+<ul>
+<li><a href="#page-loaded">Page Loaded</a></li>
+<li><a href="#click">Click</a></li>
+<li><a href="#forms">Forms</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#fetch-api">Fetch API</a>
+<ul>
+<li><a href="#http-get">HTTP GET</a></li>
+<li><a href="#http-post">HTTP POST</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="comments--debugging">Comments &amp; Debugging</h1>
+<h2 id="comments">Comments</h2>
+<p>Javscript is in the C family of langauges and has both single and multi-line comments like so:</p>
+<pre><code class="language-javascript"><div><span class="hljs-comment">//Single line comment</span>
+<span class="hljs-comment">/**
+* Multi line
+* Comment
+*/</span>
+</div></code></pre>
+<h2 id="debugging">Debugging</h2>
+<h3 id="developer-tools-built-into-the-web-browsers">Developer tools built into the web browsers</h3>
+<p>Most web browsers include tools for developing websites. The esiest way to access the developer tools is to right-click anywhere on the web page and click inspect.</p>
+<p>Once the developer tools are open you can click the &quot;Console&quot; tab to acces the Javascript console.</p>
+<pre><code class="language-bash"><div>&gt;3+3
+6
+&gt;<span class="hljs-built_in">let</span> fruit = <span class="hljs-string">&#x27;Apple&#x27;</span>;
+&gt;fruit;
+<span class="hljs-string">&quot;Apple&quot;</span>
+</div></code></pre>
+<p>The console is the current living-breathing Javascript interperter with the current state of your web page after all the scripts have run. This means you can access global variables defined inside your script files directly from the console by typing the variable name directly into the console</p>
+<pre><code class="language-javascript"><div><span class="hljs-comment">/* inside myscript.js **/</span>
+<span class="hljs-keyword">let</span> myGlobalVariable = <span class="hljs-string">&#x27;Hello World!&#x27;</span>;
+</div></code></pre>
+<pre><code class="language-bash"><div>&gt;myGlobalVariable
+<span class="hljs-string">&quot;Hello World!&quot;</span>
+</div></code></pre>
+<h2 id="troubleshooting-errors">Troubleshooting errors</h2>
+<p>Most integrated development tools will catch syntax errors for you and give you the red squiggles of death under the line causing the problem. Runtime errors can be a bit trickier to catch because they are usually the result of a logic error and don't crash right away.</p>
+<h3 id="checking-the-console">Checking the console</h3>
+<p>If an error occurs you can open the devloper console to see the error. It will look somewhat like this:</p>
+<pre><code class="language-bash"><div>ⓧ Uncaught Error: Error Message myscript.js:2
+</div></code></pre>
+<p>The <code>myscript.js:2</code> is a clickable link that you can click on to jump to the sources panel and shows your script with the red squiggles of death where the error is. The <code>:2</code> denotes the line number that is causing the error so you could also open the script in your IDE and check it there as well.</p>
+<h3 id="logging-to-the-console-from-your-scripts">Logging to the console from your scripts</h3>
+<p><code>console.log()</code> can be used to send information to the console. It can be as simple as strings, or more interestingly objects.</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">let</span> exampleObject = {<span class="hljs-attr">key</span>:<span class="hljs-string">&#x27;value&#x27;</span>}
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Hello Console Log!&#x27;</span>, exambleOjbect);
+</div></code></pre>
+<p>Objects logged out to the console can be interacted with to see the properties nested in the object. You can also right-click on objects logged to the console and select 'store as global variable' to be able to access the value from the console.</p>
+<p>In the above example the <code>exampleObject</code> is in the global scope and could be accessed directly from the console. You can also use <code>console.log</code> to get access to variables outside of the global scope!</p>
+<pre><code class="language-javascript"><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">myFunction</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">let</span> myFunctionScopedVariable = <span class="hljs-string">&#x27;Hello World!&#x27;</span>;
+    <span class="hljs-built_in">console</span>.log(myFunctionScopedVariable);
+}
+</div></code></pre>
+<h1 id="variables--control-flow">Variables &amp; Control Flow</h1>
+<h2 id="declaring-variables">Declaring Variables</h2>
+<p>In javascript we have 3 ways to declare variables</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">var</span> myVarVariable;
+<span class="hljs-keyword">let</span> myLetVariable;
+<span class="hljs-keyword">const</span> myConst;
+</div></code></pre>
+<p><code>var</code> and <code>let</code> behave the exact same except when they do not. The most notible time is re-declaring variables. You cannot redeclare a <code>let</code> variable, which is actually a nice feature because it tells the developer that the variable was already declared elsewhere and you may be trying to re-use something that is already in use.</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">var</span> iCanReVar;
+<span class="hljs-keyword">var</span> iCanReVar;
+<span class="hljs-keyword">let</span> iCannotReLet;
+<span class="hljs-keyword">let</span> iCannotReLet;<span class="hljs-comment">//This is an error</span>
+</div></code></pre>
+<p><code>let</code> is a newer feature and solves some oddities of <code>var</code>. Favor using <code>let</code> in modern javascript projects. Both <code>let</code> and <code>var</code> variables can have new values assigned . Constants are constant and cannot have new values assigned.</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">var</span> myVar = <span class="hljs-string">&#x27;a&#x27;</span>;
+myVar = <span class="hljs-string">&#x27;b&#x27;</span>;
+<span class="hljs-keyword">let</span> myLet = <span class="hljs-string">&#x27;a&#x27;</span>;
+myLet = <span class="hljs-string">&#x27;b&#x27;</span>;
+<span class="hljs-keyword">const</span> myConst = <span class="hljs-string">&#x27;a&#x27;</span>;
+myConst = <span class="hljs-string">&#x27;b&#x27;</span>;<span class="hljs-comment">//This is an error</span>
+</div></code></pre>
+<h2 id="decision-structures">Decision Structures</h2>
+<h3 id="if">if</h3>
+<p>An <code>if </code>statement checks if a condition expression is <code>true</code> and executes a block of code or statement that immideatly follows the condition check. If the expressionn evaulates to false then the block of code or statement is skipped.</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">let</span> myCondition = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">if</span>(myCondition){<span class="hljs-comment">//start of code block</span>
+    <span class="hljs-comment">/**
+     * The code between the curly braces
+     * here will run if the condition
+     * between the parenthesis evaulatues 
+     * to true
+     */</span>
+}<span class="hljs-comment">//end of code block</span>
+<span class="hljs-keyword">if</span>(myCondition) 
+<span class="hljs-comment">/** 
+ * Notice the lack of curly braces
+ * so only the next statement will run
+ * You usually tell when a statement
+ * ends with a semicolon ;
+ * /
+</span></div></code></pre>
+<p>If you are just getting started I recommend avoiding ommiting the curly braces. It is esier to make a logic mistake down the road if you need to have a second statement bound to the if condition. The three examples bellow are equivalent:</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">let</span> myCondition = <span class="hljs-literal">false</span>;
+
+<span class="hljs-keyword">if</span>(myCondition){
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;This will not run&#x27;</span>);
+}
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;This will run&#x27;</span>);
+</div></code></pre>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">if</span>(myCondition) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;This will not run&#x27;</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;This will run&#x27;</span>);
+</div></code></pre>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">if</span>(myCondition)
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;This will not run&#x27;</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;This will run&#x27;</span>);
+</div></code></pre>
+<p>As you can see using the curly brace makes it very clear what code will run if the condition is true.</p>
+<h3 id="disjointed-if">Disjointed if</h3>
+<p>If there are two <code>if</code> statements one after another, each ones condition will be evaluated and both could possibly run.</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">let</span> conditionA = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">let</span> conditionB = <span class="hljs-literal">true</span>;
+
+<span class="hljs-keyword">if</span>(conditionA){
+    <span class="hljs-comment">//This code will run</span>
+}
+<span class="hljs-keyword">if</span>(conditionB){
+   <span class="hljs-comment">//This code will run</span>
+}
+</div></code></pre>
+<h3 id="ifelse-ifelse">if/else if/else</h3>
+<p>If you need only one code block to run can join multi conditions together with <code>if(){} else if{}</code>. By adding the else we join to conditions together causing them to be mutually exclusive, meaning only one code block will ever run. Only the first condition to evaluate to <code>true</code> will have it's respective code block run, additionally subsequent conditions will not even be checked! You can leverage this characteristic to wisely order your conditions so that computationally intensive operations don't run needlesly.</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">let</span> conditionA = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">let</span> conditionB = <span class="hljs-literal">true</span>;
+
+<span class="hljs-keyword">if</span>(conditionA){
+    <span class="hljs-comment">//This code block will run</span>
+}<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(conditionB){<span class="hljs-comment">//this condition won&#x27;t even be checked</span>
+<span class="hljs-comment">//This code block won&#x27;t run</span>
+}
+</div></code></pre>
+<p>You can use a <code>else</code> to catch the case when no conditions are true</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">let</span> conditionA = <span class="hljs-literal">false</span>;
+<span class="hljs-keyword">let</span> conditionB = <span class="hljs-literal">false</span>;
+
+<span class="hljs-keyword">if</span>(conditionA){
+    <span class="hljs-comment">//This code block won&#x27;t run</span>
+}<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(conditionB){
+    <span class="hljs-comment">//This code block won&#x27;t run</span>
+}<span class="hljs-keyword">else</span>{
+    <span class="hljs-comment">//No of the conditions were true, so else runs</span>
+    <span class="hljs-comment">//This code block will run</span>
+}
+</div></code></pre>
+<h3 id="switch">Switch</h3>
+<p>A switch statement is a fancy version of a <code>if/else if/else</code> statement. You use it to compare one value against many different values. The switch does have the added feature called <em>case fallthrough</em> where you can have multiple blocks of code execute, recall <code>if/else if/else</code> is mutually exclusive and only one code lock wil ever run.</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">let</span> compareThisTo = <span class="hljs-string">&#x27;My Value&#x27;</span>;
+
+<span class="hljs-keyword">switch</span>(compareThisTo){
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;Some Value&#x27;</span>:
+        <span class="hljs-comment">//this won&#x27;t run</span>
+        <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;Some Other Value&#x27;</span>:
+        <span class="hljs-comment">//this also won&#x27;t run</span>
+        <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;My Value&#x27;</span>:
+        <span class="hljs-comment">//This will run!</span>
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;Example of case fallthrough&#x27;</span>:
+        <span class="hljs-comment">//This will also run!</span>
+        <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">default</span>:
+        <span class="hljs-comment">/**
+         * This would have run if
+         * none of the other cases matched
+         */</span>
+        <span class="hljs-keyword">break</span>;
+}
+</div></code></pre>
+<h3 id="for-loop">For Loop</h3>
+<p>Loops allow you to repeat a block of code. A for loop follows the following syntax:</p>
+<p><code>for(initializer, condition, post loop action)</code></p>
+<p>| Syntax | Description | | ---------------- | ----------------------------------------------------------------------------- | | initializer | Sets up the <code>loop variable</code> to be used to check if the loop should exit | | condition | The condition that needs to be met. It should be checking if the <code>loop variable</code> is some value. | | post loop action | The statement gets executed after the block of code tied to the loop runs. The expression should be changing the value of <code>loop variable</code> to approach the condition needed to exit the loop. |</p>
+<pre><code><code><div>for(let i = 0; i &lt; 10; i++){
+    //This code block will run 10 times
+}
+</div></code></code></pre>
+<h1 id="representing-data">Representing Data</h1>
+<h2 id="arrays">Arrays</h2>
+<p>Arrays are a ordered sequence of data. InJavascript each piece of data can be anything and they do not all have to be the same.</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">let</span> anything = [<span class="hljs-string">&#x27;stringvalue&#x27;</span>, <span class="hljs-literal">false</span>, <span class="hljs-number">2.0</span>,[]];
+</div></code></pre>
+<p>To access elements in the array we use the bracket <code>myArray[theIndex]</code> syntax, where <code>myArray</code> is the array you want to access and <code>[theIndex]</code> is a number that matches up with each element in the array starting at 0.</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">let</span> fruits = [<span class="hljs-string">&#x27;Apple&#x27;</span>, <span class="hljs-string">&#x27;Orange&#x27;</span>, <span class="hljs-string">&#x27;Peach&#x27;</span>];
+fruits[<span class="hljs-number">0</span>]<span class="hljs-comment">//Apple</span>
+frtuis[<span class="hljs-number">1</span>]<span class="hljs-comment">//Orange</span>
+fruits[<span class="hljs-number">2</span>]<span class="hljs-comment">//Peach</span>
+</div></code></pre>
+<h3 id="iterating-over-an-array">Iterating over an array</h3>
+<p>There are a handful of ways to iterate (access each value) over an array. In the following examples <code>myArray</code> is an array variable and <code>myValue</code> is a value in the array. Here is an example of accesing each value manually:</p>
+<pre><code><code><div>let myArray = ['value1', 'value2'];
+let myValue = myArray[0];
+myValue = myArray[1];
+</div></code></code></pre>
+<h4 id="for-with-index">for with index</h4>
+<pre><code><code><div>for(let i = 0; i &lt; myArray.length; i++){
+    let myValue = myArray[i];
+}
+</div></code></code></pre>
+<h4 id="for-of">for-of</h4>
+<pre><code><code><div>for(let myValue of myArray){
+
+}
+</div></code></code></pre>
+<h4 id="arrayprototypeforeach">Array.prototype.forEach</h4>
+<pre><code><code><div>myArray.forEach((myValue)=&gt;{
+
+});
+</div></code></code></pre>
+<h2 id="object-literals">Object Literals</h2>
+<p>Object literals are where we are creating a little object on the fly, as apposed to using a class and the <code>new</code> keyword. The can be used like traditional objects but are morefrequently used as simple ways to store data. We can use dot <code>.</code> and bracket <code>[]</code> notation to access the values stored in the object literal.</p>
+<pre><code><code><div>let myObjectLiteral = {
+    myKey: 'myValue',
+    firstName: 'Austin'
+};
+myObjectLiteral.myKey//myValue
+myObjectLiteral['myKey']//myValue
+myObjectLiteral.firstName//Austin
+myObjectLiteral['firstName']//Austin
+</div></code></code></pre>
+<h3 id="iterating-over-an-object">Iterating over an object</h3>
+<p>Objects are not sequenced, meaning there is no gurantee the order you will iterate over the data. It's not even gurantee calling the same code twice will run in the same order! That being said it usually does.</p>
+<p>In the following examples <code>myObj</code> is an object literal variable. <code>myKey</code> is a key in the object, and <code>myValue</code> is the value associated with <code>myKey</code> Here is an example of accesing each key/value manually:</p>
+<pre><code><code><div>let myObj = { key1: 'value1', key2: 'value2'};
+let myKey = 'key1';
+let myValue = myObj[myKey];
+myKey = 'key2';
+myValue = myObj[myKey];
+</div></code></code></pre>
+<h4 id="for-in">for-in</h4>
+<pre><code><code><div>for(let myKey in myObj){
+    let myValue = myObj[myKey];
+}
+</div></code></code></pre>
+<h4 id="objectkeys">Object.keys</h4>
+<pre><code><code><div>Object.keys(myObj).forEach((myKey)=&gt;{
+    let myValue = myObj[myKey];
+});
+</div></code></code></pre>
+<h4 id="objectvalues">Object.values</h4>
+<pre><code><code><div>Object.values(myObj).forEach((myValue)=&gt;{
+
+});
+</div></code></code></pre>
+<p>*note: no access to keys</p>
+<h4 id="objectentries">Object.entries</h4>
+<pre><code><code><div>Object.entries(myObj).forEach((entry)=&gt;{
+    let myKey = entry[0];
+    let myValue = entry[1];
+});
+</div></code></code></pre>
+<h2 id="classes">Classes</h2>
+<p>Just like object literals but have a formal structure that i shared across all instances of the class. You can use the same iteration strategies above with instances of classes. Not that methods in javascript are like any other piece of data and will show up in the iteration.</p>
+<pre><code><code><div>class Geometry{
+    constructor(length, width){
+        this.length = lengthl;
+        this.width = width;
+    }
+
+    calculateArea(){
+        return this.length * this.width;
+    }
+}
+class Square extends Geometry{
+    constructor(side){
+        super(side, side);
+    }
+}
+let geom = new Geom(2,2);
+geom.calclulateArea();//4
+let square = new Square(5);
+square.calculateArea();//25
+</div></code></code></pre>
+<h1 id="functions">Functions</h1>
+<p>Functions allow us to create reusable pieces of code. Functions are special in Javascript as they are treated like any other piece of data!</p>
+<h2 id="named-function-decleration">Named function decleration</h2>
+<pre><code><code><div>function myFunctionName(myFunctionVariableOne){
+    let myFunctionScoepdVariable;
+    return 'My Return Value';
+}
+</div></code></code></pre>
+<h1 id="dom-api">DOM API</h1>
+<p>The DOM API is all about grabing elements off the DOM tree and modifying their properties or listening for events.</p>
+<h2 id="querying-the-dom-tree">Querying the DOM tree</h2>
+<p>The esiest way to make sure the DOM tree is completely loaded is to use the <code>defer</code> attribute on your script tag.</p>
+<pre><code><code><div>&lt;script src=&quot;myscript.js&quot; defer&gt;&lt;/script&gt;
+</div></code></code></pre>
+<p><code>querySelector</code> and <code>querySelectorAll</code> are the primary ways of querying the DOM tree. They both work with any valid CSS selector.</p>
+<h3 id="query-for-a-single-element">Query for a single element</h3>
+<pre><code><code><div>let myElement = document.querySelector('p');
+</div></code></code></pre>
+<h3 id="query-the-children-of-an-element">Query the children of an element</h3>
+<pre><code><code><div>let myParentElement = document.querySelecto('#parent');
+
+let childElements = myParentElement.querySelector('p');
+</div></code></code></pre>
+<p>*Note: we could have also done a CSS descendent selector</p>
+<h3 id="query-for-multiple-elements">Query for multiple elements</h3>
+<pre><code><code><div>let myElements = document.querySelectorAll('p');
+</div></code></code></pre>
+<p>You can use all the strategies from <a href="#iterating-over-an-array">Iterating over an array</a> to work with the results of <code>querySelectorAll</code> even though it's technically a NodeList and not an Array.</p>
+<h2 id="changing-style-and-content-of-an-element">Changing style and content of an element</h2>
+<p>I recommend to do the bulk of your stylework in CSS, afterall it's what CSS is best for! Then in javascript all we have to is add/remove/toggle CSS classes to our element.</p>
+<pre><code><code><div>&lt;style&gt;
+.my-awesome-css-class{
+   color: yellow;
+}
+&lt;/style&gt;
+&lt;script&gt;
+let el = document.querySelector('p');
+el.classList.add('my-awesome-css-class');
+el.classList.remove('my-awesome-css-class');
+el.classList.toggle('my-awesome-css-class');
+&lt;/script&gt;
+</div></code></code></pre>
+<p>For conttent 99% of the time you can use textContent. This will escape html and render the markup instad of running it.</p>
+<pre><code><code><div>let el = document.querySelector('p');
+el.textContent = 'Hello World!';
+</div></code></code></pre>
+<p>If you are in control of where the data is coming from and need to add HTML content you can use <code>innerHTML</code>. Note that this is dangerous if you use it with arbitrary user input as you are essentially giving them complete control of the clientside of the website.</p>
+<pre><code><code><div>let el = document.querySelector('section');
+el.innerHTML= '&lt;header&gt;&lt;h1&gt;Hello World!&lt;/h1&gt;&lt;/header&gt;';
+</div></code></code></pre>
+<h2 id="creating-elements">Creating elements</h2>
+<p>You can use <code>innerHTML</code> from above or <code>createElement</code></p>
+<pre><code><code><div>let myNewElement = document.createElement('p');
+myNewElement.textContent = 'Hello createElement!';
+document.body.appendChild(myNewElement);
+</div></code></code></pre>
+<h2 id="listening-for-events">Listening for events</h2>
+<p>You cvan listen for events on any HTML element that you grabbed off of the page with <code>querySelector</code>. You <em>could</em> use <code>querySelectorAll</code> and attach an event listener on each element but that is not avised since it attaches a ton of listeners. Events 'bubble' up the DOM tree till it is caught. This means that you can listen for an event on a parent element and catch it when an event fires from one of it's child elements. This has the added benifit that dynamically added elements events will also be captured by the parent element instead of having to attach a new event handler on each element.</p>
+<h3 id="page-loaded">Page Loaded</h3>
+<p>You can wrap all your code in the <code>DOMContentLoaded</code> event to wait for the DOM Tree fully loaded. This means you can be sure that when you run a <code>querySelector</code> that the elements will all be there. You can also use the <code>defer</code> attribute so that you do not need to have everything in a function scope.</p>
+<pre><code><code><div>document.addEventListener('DOMContentLoaded',()=&gt;{
+   //This code will run once the DOM tree is completly built
+});
+</div></code></code></pre>
+<h3 id="click">Click</h3>
+<pre><code><code><div>document.addEventListener('click',(event)=&gt;{
+    let target = event.target //the thing that was clicked
+    //Example event delegation, filter out things we are
+    //not interested in listening for
+    if(target.element.targetName !== 'BUTTON') return;
+});
+</div></code></code></pre>
+<h3 id="forms">Forms</h3>
+<pre><code><code><div>const form = document.querySelector('form');
+form.addEventListener('submit',(event)=&gt;{
+    /**
+    Stops the default behaviour of forms from happening
+    This lets us handle the form in javascript
+    insted of issuing a request to the server
+    */
+    event.preventDefault();
+});
+</div></code></code></pre>
+<h1 id="fetch-api">Fetch API</h1>
+<p>Fetch is an awesome API for allowing us to issue HTTP Requests from javascript. This means we can send requests to the server in our scripts.</p>
+<p>Not all webpages can be accessed directly form javascript using fetch. You will have to give it a try and if you see an error in the console about <code>CORS</code> then you know it won't work.</p>
+<p>We'll be using <code>async</code> functions to issue the requests. This allows us to <code>await</code> results from our HTTP requests. <code>async/await</code> can be a bit difficult to learn, for now just know that it means the code is nnot running right away and the code 'pauses' when you see the <code>await</code> keyword.</p>
+<h2 id="http-get">HTTP GET</h2>
+<pre><code><code><div>async function MyApp(){
+    const response = await fetch('https://httpbin.org/get');
+    const data = await response.json(); //or response.text()
+    /**
+    The value of data will be the same as if you had went
+    to the webpage directly
+    */
+}
+MyApp();
+</div></code></code></pre>
+<h2 id="http-post">HTTP POST</h2>
+<pre><code><code><div>async function MyApp(){
+   const form = document.querySelector('form');
+   const formData = new FormData(form);
+   const response = await fetch('https://httpbin.org/post',{
+       method: 'POST',
+       body: formData
+   });
+   const data = await response.json(); //or response.text()
+}
+MyApp();
+</div></code></code></pre>
+
+        
+        
+    </body>
+    </html>
