@@ -6,6 +6,10 @@ import meLandscape from '../public/me-landscape.jpg';
 import mePortrait from '../public/me-portrait.jpg';
 
 export default function Home() {
+  /**
+   *       <Link href="/tutorials">Tutorials</Link> 
+      <Link href="/lectures">Lecture Captures</Link>
+   */
   return <Layout title="Austin Allman - Javascript Expert" meta="A website about the skills and talents of Austin Allman">
     <Screen coverImageLandscape={meLandscape} coverImagePortrait={mePortrait} coverImageAlt="Picture of Austin Allman">
     <h1>Welcome!</h1>
@@ -13,8 +17,6 @@ export default function Home() {
     <LinkList>  
       <Link href="/projects">Projects</Link>
       <Link href="/references">Quick References</Link>
-      <Link href="/tutorials">Tutorials</Link> 
-      <Link href="/lectures">Lecture Captures</Link>
     </LinkList>
     </Screen>
   </Layout>
